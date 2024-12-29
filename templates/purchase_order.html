@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Purchase Order</title>
+</head>
+<body>
+    <h1>Create Purchase Order</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="product">Product:</label>
+        <select id="product" name="product">
+            {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity">
+        <label for="purchase_price">Purchase Price:</label>
+        <input type="number" id="purchase_price" name="purchase_price" step="0.01">
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

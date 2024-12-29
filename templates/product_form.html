@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create/Edit Product</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script>
+        function toggleVatRate() {
+            var vatIncludedCheckbox = document.getElementById('id_vat_included');
+            var vatRateField = document.getElementById('id_vat_rate');
+            vatRateField.disabled = !vatIncludedCheckbox.checked;
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Initialize the state of the VAT rate field on page load
+            toggleVatRate();
+
+            // Add event listener to the checkbox
+            document.getElementById('id_vat_included').addEventListener('change', toggleVatRate);
+        });
+    </script>
+</head>
+<body>
+    <h1>Create/Edit Product</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

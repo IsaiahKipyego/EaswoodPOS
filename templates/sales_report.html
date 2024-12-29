@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Report</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        @media print {
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Sales Report - {{ period|title }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Total Quantity Sold</th>
+                <th>Total Sales</th>
+                <th>VAT Rate</th>
+                <th>Total VAT</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td>{{ transaction.product__name }}</td>
+                    <td>{{ transaction.total_quantity }}</td>
+                    <td>{{ transaction.total_sales }}</td>
+                    <td>{{ transaction.product__vat_rate }}%</td>
+                    <td>{{ transaction.total_vat }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3>Total VAT: {{ total_vat }}</h3>
+    <button onclick="window.print()">Print Report</button>
+</body>
+</html>
