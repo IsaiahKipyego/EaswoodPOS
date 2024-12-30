@@ -1,4 +1,6 @@
 from django.db import models
+import random
+import string
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -13,7 +15,7 @@ class Product(models.Model):
     selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     stock = models.IntegerField()
     barcode = models.CharField(max_length=50, unique=True, blank=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_DEFAULT, default=1)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     vat_included = models.BooleanField(default=True)
     vat_rate = models.DecimalField(max_digits=5, decimal_places=2, default=16.00)
     pos_listing = models.BooleanField(default=False, verbose_name="List on POS")
@@ -24,8 +26,6 @@ class Product(models.Model):
         super().save(*args, **kwargs)
 
     def generate_unique_barcode(self):
-        import random
-        import string
         length = 7
         characters = string.digits
         while True:
@@ -50,3 +50,8 @@ class Transaction(models.Model):
 
     def __str__(self):
         return f"{self.transaction_type} - {self.product.name}"
+
+    def save(self, *args, **kwargs):
+        if self.transaction_type == 'sale' and self.selling_price is None:
+            self.selling_price = self.product.selling_price
+        super().save(*args, **kwargs)

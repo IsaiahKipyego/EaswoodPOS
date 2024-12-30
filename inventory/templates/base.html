@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <!-- Common Header Content -->
+        </div>
+        <div class="bottom-header">
+            <div class="breadcrumb">
+                <!-- Breadcrumb Navigation -->
+                {% block breadcrumb %}{% endblock %}
+            </div>
+        </div>
+    </header>
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+    <footer>
+        &copy; 2024 My Site
+    </footer>
+</body>
+</html>

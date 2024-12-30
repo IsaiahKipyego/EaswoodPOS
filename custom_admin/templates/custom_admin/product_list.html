@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+    <h1>Product List</h1>
+    <a href="{% url 'custom_admin:product_add' %}">Add Product</a>
+    <ul>
+        {% for product in products %}
+        <li>
+            {{ product.name }} - {{ product.selling_price }}
+            <a href="{% url 'custom_admin:product_edit' product.pk %}">Edit</a>
+            <a href="{% url 'custom_admin:product_delete' product.pk %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

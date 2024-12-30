@@ -78,3 +78,33 @@ def custom_sales_report(request):
         }
         return render(request, 'sales_report.html', context)
     return render(request, 'custom_sales_report.html')
+def home(request):
+    return render(request, 'home.html')
+
+def product_list(request):
+    products = [
+        {'name': 'Product 1', 'price': 100},
+        {'name': 'Product 2', 'price': 200},
+        {'name': 'Product 3', 'price': 300},
+    ]
+    return render(request, 'product_list.html', {'products': products})
+
+def add_stock(request):
+    message = "Add stock page"
+    return render(request, 'add_stock.html', {'message': message})
+
+def make_sale(request):
+    message = "Make sale page"
+    return render(request, 'make_sale.html', {'message': message})
+
+def add_category(request):
+    message = "Add category page"
+    return render(request, 'add_category.html', {'message': message})
+
+def purchase_order(request):
+    message = "Purchase order page"
+    return render(request, 'purchase_order.html', {'message': message})
+
+def invoice(request):
+    message = "Invoice page"
+    return render(request, 'invoice.html', {'message': message})

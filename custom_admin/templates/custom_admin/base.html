@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Admin Panel{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="{% static 'js/main.js' %}" defer></script>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            Eastwood Administration
+        </div>
+        <div class="bottom-header">
+            <div class="breadcrumb">
+                <a href="#">Home</a>
+                <span>›</span>
+                <a href="#">Inventory</a>
+                <span>›</span>
+                <a href="#">Categories</a>
+                <span>›</span>
+                <a href="#">Add Category</a>
+            </div>
+        </div>
+    </header>
+    <div class="wrapper">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <ul class="components">
+                <li>
+                    <a href="{% url 'custom_admin:index' %}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{% url 'custom_admin:category_list' %}">Categories</a>
+                </li>
+                <li>
+                    <a href="{% url 'custom_admin:product_list' %}">Products</a>
+                </li>
+                <li>
+                    <a href="{% url 'custom_admin:transaction_list' %}">Transactions</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
+            <!-- Main Content -->
+            <main>
+                {% block content %}{% endblock %}
+            </main>
+
+            <!-- Footer -->
+            <footer>
+                <div class="container-fluid">
+                    <p>&copy; 2024 Admin Panel. All Rights Reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>
